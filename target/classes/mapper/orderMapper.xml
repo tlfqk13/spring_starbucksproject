@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.scit.starbucks.dao.OrderMapper">
+  
+  
+  <select id="orderSelectList" resultType="order">
+	select 
+        c.orderid
+        ,c.ordercode
+        ,c.userid
+        ,d.drinkname
+        ,c.productquantity
+        ,c.price
+        ,ds.drinksize
+    from
+        starbucksOrder c, drink d, drinksize ds
+    where 
+        (c.productName =d.drinkname or c.productName=d.drinkID)
+        and c.drinksizeid = ds.drinksizeID
+    order by orderid desc
+
+  </select>
+  
+
+	<insert id="orderInsertList">
+		insert into starbucksOrder (
+		orderID
+		,orderCode
+		,userID
+		,productQuantity
+		,drinksizeID
+		,productName
+		,price
+		,customInfoID
+		)
+		values(
+		starbucksOrder_seq.nextval
+		,#{orderCode}
+		,#{userID}
+		,#{productQuantity}
+		,#{drinksizeID}
+		,#{productName}
+		,#{price}
+		,#{customInfoID}
+		)
+
+	</insert>
+	
+	<insert id="cartInOrderInsertList">
+		insert into starbucksOrder (
+		orderID
+		,orderCode
+		,userID
+		,ProductQuantity
+		,drinksizeID
+		,productName
+		,price
+		,customInfoID
+		,cartID
+		)
+		values(
+		starbucksOrder_seq.nextval
+		,#{orderCode}
+		,#{userID}
+		,#{ProductQuantity}
+		,#{drinksizeID}
+		,#{productName}
+		,#{price}
+		,#{customInfoID}
+		,#{cartID}
+		)
+
+	</insert>
+	
+	  
+  <select id="orderPayList" resultType="order">
+SELECT
+	    *  
+	FROM(
+	    SELECT 
+	        c.orderID
+            ,c.price
+            ,c.productquantity
+            ,d.drinkName
+            ,ds.drinkSize
+	    FROM starbucksOrder c, drink d,drinksize ds
+        where c.productName=d.drinkID and c.drinksizeid = ds.drinksizeID
+	    ORDER BY c.orderID DESC)
+	WHERE ROWNUM = 1
+  
+  </select>
+  
+  <select id="paytoOrderSelectList" resultType="order">
+  
+  select 
+    *
+    from
+        starbucksOrder
+    where
+        orderID=#{orderID}
+  </select>
+
+  <select id="orderSelectListFromCart" resultType="order">
+  
+	select 
+	     so.orderID
+        ,so.productName
+        ,ds.drinkSize
+        ,so.productquantity
+        ,so.price
+	from 
+	     starbucksOrder so, drinkSize ds
+	<![CDATA[     
+	where
+	    #{cartListSize}>=ROWNUM
+	    and so.drinksizeid=ds.drinksizeid
+	]]>
+	order by 
+	    orderID desc
+	    
+  </select>
+  
+
+  </mapper>

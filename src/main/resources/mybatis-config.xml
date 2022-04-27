@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.scit.starbucks.drinkvo.DrinkVO" alias="drink" />
+		<typeAlias type="com.scit.starbucks.productvo.ProductVO" alias="product" />
+		<typeAlias type="com.scit.starbucks.ordervo.CartVO" alias="cart"/>
+		<typeAlias type="com.scit.starbucks.ordervo.OrderVO" alias="order"/>
+		<typeAlias type="com.scit.starbucks.drinkvo.DrinkSizeVO" alias="drinkSize" />
+		<typeAlias type="com.scit.starbucks.ordervo.OrderVO" alias="order"/>
+		<typeAlias type="com.scit.starbucks.drinkvo.CustomInfoVO" alias="custom"/>
+		<typeAlias type="com.scit.starbucks.payvo.PayVO" alias="pay"/>
+		<typeAlias type="com.scit.starbucks.mygradevo.MyGradeVO" alias="myGrade"/>
+		<typeAlias type="com.scit.starbucks.uservo.StarbucksUserVO" alias="user"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mapper/drinkMapper.xml" />
+		<mapper resource="mapper/productMapper.xml" />
+		<mapper resource="mapper/cartMapper.xml"/>
+		<mapper resource="mapper/orderMapper.xml"/>
+		<mapper resource="mapper/payMapper.xml"/>
+		<mapper resource="mapper/myGradeMapper.xml"/>
+		<mapper resource="mapper/userMapper.xml"/>
+	</mappers>
+</configuration>

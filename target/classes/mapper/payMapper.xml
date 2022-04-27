@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.scit.starbucks.dao.PayMapper">
+  
+  <select id="paySelectList" resultType="pay">
+	SELECT
+	    * 
+	FROM(
+	    SELECT 
+	        * 
+	    FROM starbucksOrder
+	    ORDER BY orderID DESC)
+	WHERE ROWNUM = 1
+  
+  </select>
+  
+  <insert id="payInsertList">
+  
+  insert into pay(
+     payID 
+    ,userID 
+    ,orderID 
+    ,payType 
+    ,payDate 
+    ,cartID 
+  	)
+  	values(
+  	pay_seq.nextval	
+  	,'son'
+  	,#{orderID}
+  	,'카드'
+  	,sysdate
+  	,32
+  	)
+  </insert>
+  
+  <insert id="payInsertFromCart">
+  
+  insert into pay(
+     payID 
+    ,userID 
+    ,orderID 
+    ,payType 
+    ,payDate 
+    ,cartID 
+  	)
+  	values(
+  	pay_seq.nextval	
+  	,'son'
+  	,#{orderID}
+  	,'카드'
+  	,sysdate
+  	,#{cartID}
+  	)
+  </insert>
+  
+  
+<delete id="payCompleteDeleteCart"> 
+	delete 
+		cart 
+	where 
+		cartID = #{cartID} 
+</delete>
+
+<update id="updateStarpointnum">
+update
+   mygrade m
+set
+   starpointnum = starpointnum + 1
+where 
+    userID = 'son'
+</update>
+
+
+
+
+  </mapper>

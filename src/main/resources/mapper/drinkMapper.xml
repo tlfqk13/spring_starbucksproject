@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.scit.starbucks.dao.DrinkMapper">
+  
+  <select id="drinkSelectList" resultType="drink">
+  	select 
+  		drinkID,drinkName,drinkPrice,customInfoID
+  	from 
+  		drink
+    order by to_number(drinkID)
+  </select>
+  
+  <select id="drinkContentSelectList" resultType="drink">
+  	select 
+  		drinkName,drinkContent,drinkPrice,drinkID
+  	from 
+  		drink
+  	where 
+  		drinkID=#{drinkID}
+  </select>
+ 
+ <select id="drinkSizeList" resultType="drinkSize">
+ 	select 
+ 		drinkSizeID
+ 		,drinkSize
+ 		,drinkSizeAdd
+ 	from 
+ 		drinkSize
+ </select>
+ 
+  <select id="customList" resultType="custom">
+ 	select 
+ 		*
+ 	from 
+ 		customInfo
+ </select>
+  
+  </mapper>

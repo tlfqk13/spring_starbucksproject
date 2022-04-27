@@ -1,0 +1,20 @@
+.bg-gray-800 {
+    background-color:	#362415;
+}
+#cardLength{
+	height: 500px;
+	
+}
+#selectBtn{
+	margin-right: 10px;
+	
+}
+#orderbtn{
+	 background-color: #362415;
+  color: white;
+  border: 2px solid #604c4c; /* Green */
+
+}
+.py-12{
+	background-color: rgba(209,213,219,var(--tw-bg-opacity));
+}
